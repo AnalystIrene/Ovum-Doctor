@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+     <title> Login | Gyn</title>
+     <style>
+
+     </style>
+     
+    </head>
+    <body>
+        <div>
+
+            <h3>LOGIN</h3>
+
+
+    <div id="form">
+            <form>
+
+                <label for = "Health Facility Name" class="lbl"> Health Facility Name </label><br>
+                <input type="text" name ="Health Facility Name" id="HFC" class="bbbb" placeholder = " Enter Health Facility Name" ><br>
+    
+                <label for = "Doctors Name" class="lbl"> Doctors Name </label><br>
+                <input type="text" name = "Doctors Name" id="DN" class="bbbb" placeholder="Enter Doctors Name"> <br>
+
+                <label for="loginOptions">Login Method</label><br />
+                <select id="loginOptions">
+                    <option>Choose desired Login Method</option>
+                    <option>Password</option>
+                    <option>One Time Passcode</option>
+                </select><br />
+    
+                <label for = "Patient's code" class="lbl" id="var-field">Patient's code</label><br>
+                <input id="var-field-input" type="password" name = "patient's code" id= "PC" class="bbbb" placeholder=""><br>
+    
+                <input type="submit" class="eeeee" id="btn1" value = "LOGIN">
+            </form>
+            </div>
+         </div>
+    </body>
+
+    <script>
+
+    loginOptions = document.getElementById('loginOptions')
+    let var_filed = document.getElementById('var-field')
+    let var_filed_input = document.getElementById('var-field-input')
+
+    var_filed_input.style.display = 'none'
+    var_filed.style.display = 'none'
+
+    loginOptions.addEventListener('change', ()=>{
+
+    if(loginOptions.value == 'Password'){
+    var_filed.innerHTML = 'Password'
+    var_filed_input.placeholder = 'Enter Password'
+    var_filed_input.style.display = 'inline'
+    var_filed.style.display = 'inline'
+    }
+
+    else if(loginOptions.value == 'One Time Passcode'){
+    var_filed_input.placeholder = 'Enter One Time Passcode'
+    var_filed_input.style.display = 'inline'
+    var_filed.style.display = 'inline'
+    }
+
+    else if(document.getElementById('loginOptions').value == 'Choose desired Login Method'){
+        var_filed_input.style.display = 'none'
+        var_filed.style.display = 'none'
+    }
+    })
+
+
+            
+    document.getElementById("btn1").addEventListener("click", (event)=> {
+        event.preventDefault();
+        //window.location = "./rene.php";});
+
+        switch(document.getElementById('loginOptions').value) {
+            case 'Choose desired Login Method':
+                alert('Choose desired Login Method');
+                break;
+
+            case 'Password':
+                window.location.href = './patientInfoSummary.html'
+                break;
+
+            case 'One Time Passcode':
+                window.location.href = './rene.php'
+                break;
+        }
+    });
+
+    </script>
+
+
+
+</html>

@@ -1,0 +1,8 @@
+@font-face {
+    font-family: playWrite;
+    src: url(../../additionalPage/Playwrite_DE_Grund/PlaywriteDEGrund-VariableFont_wght.ttf);
+}
+
+body{
+    font-family: playWrite;
+}

@@ -1,0 +1,128 @@
+.heading{
+    width: 100vw;
+    height: 70px;
+
+    color: white;
+    background-color: navy;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 20px;
+}
+
+.main{
+    width: 100%;
+    display: flex;
+}
+
+.navbar{
+    background-color: aqua;
+    width: 320px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    
+}
+
+.logoutButton{
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 40px;
+    width: 100%;
+
+}
+
+.logoutButton:hover{
+    background-color: black;
+    color: white;
+    
+}
+
+.logout:hover{
+    cursor: pointer;
+}
+
+.options{
+    padding-left: 10px;
+    padding-right: 10px;
+
+    padding-top: 10px;
+    
+}
+
+.optionButton{
+    line-height: 48px;
+    margin-bottom: 10px;
+    text-align: center;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.optionButton:hover{
+    background-color: black;
+    color:white;
+    cursor: pointer;
+}
+
+.doctorsOptions{
+    display: flex;
+    margin-right: 20px;
+    justify-content: right;
+}
+
+.overview{
+    margin-right: 20px;
+}
+
+.overview:hover, .summary:hover{
+    cursor: pointer;
+
+    background-color: white;
+    color: black;
+
+}
+
+.overview, .summary{
+    background-color: grey;
+    padding: 5px 10px;
+    border-radius: 3px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: black;
+}
+
+body{
+    height: calc(100vh);
+}
+
+.patient_id{
+    line-height: 48px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.space{
+    width: 270px;
+    background-color: aqua;
+    height: 70px;
+}
