@@ -33,17 +33,16 @@ $dbname = "mydb";
 $conn = new mysqli($servername,$username,$password,$dbname);
 //check connection
 if($conn->connect_error){
-    die("connection failed:"
-    $conn->connect_error);
+    die("connection failed: " . $conn->connect_error);
 }
-$sql = "SELECT cycle_dates ,Menstrual_Period_dates,Period_status,Bloodflow ,Fertile_window,ovulation_date,period_lenth,symptoms,FROM my_symptoms;"
+$sql = "SELECT cycle_dates ,Menstrual_Period_dates,Period_status,Bloodflow ,Fertile_window,ovulation_date,period_lenth,symptoms,FROM my_symptoms";
 $result = $conn->query($sql);
  
 if($result->num_rows>0){
     while($row=$result->fetch_assoc()){
         echo "cycle_dates:" .$row["cycle_dates"]."Menstrual_Period_dates:".$row["Menstrual_Period_dates"]."Period_status:".$row["Period_status"]."Bloodflow:" .$row["Bloodflow"]."Fertile_window:" .$row["Fertile_window"]."ovulation_date:" .$row["ovulation_date"]."period_lenth:" .$row["period_lenth"]."symptoms:" .$row["symptoms"]."< br>";   }
 }else{
-    echco "0 results";
+    echo "0 results";
 }
-$conn->close(;)
+$conn->close();
 ?>
