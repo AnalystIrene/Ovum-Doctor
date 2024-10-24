@@ -5,7 +5,6 @@
      <style>
 
      </style>
-     
     </head>
     <body>
         <div>
@@ -73,6 +72,7 @@
     document.getElementById("btn1").addEventListener("click", (event)=> {
         event.preventDefault();
         //window.location = "./rene.php";});
+        var route_to;
 
         switch(document.getElementById('loginOptions').value) {
             case 'Choose desired Login Method':
@@ -80,11 +80,13 @@
                 break;
 
             case 'Password':
-                window.location.href = './patientInfoSummary.html'
+                route_to = "./views/patientInfoSummary.html";
+                window.location.href = route_to;
                 break;
 
             case 'One Time Passcode':
-                window.location.href = './rene.php'
+                route_to = "./views/rene.php";
+                window.location.href = route_to;
                 break;
         }
     });

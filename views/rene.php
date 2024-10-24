@@ -160,71 +160,71 @@
         .MyDiv2, .MyDiv3, .MyDiv4, .MyDiv7, .MyDiv8, .MyDiv9, .MyDiv10, .MyDiv11, .MyDiv12, .MyDiv13, .MyDiv14{
         margin-top: 34px;
         
-    }
-
-    .MyDiv5{
-        margin-bottom: 20px;
-    }
-    .MyDiv15{
-    margin-top: 34px;
-    margin-bottom: 34px;
-    }
-    body{
-        display: flex; 
-        flex-direction: column;          
-        background-color: antiquewhite;
-    }
-
-    .first_category {
-            border: 1px solid white;
-            padding-left: 20px;
-            width: 70%;
-            border-radius: 20px;
-            margin-left: 10%;
-            background-color: white;
         }
 
-    .second_category{
-            border: 2px solid white;
-            padding-left: 30px;
-            margin-left: 10%;
-            width: 70%;
-            border-radius: 20px;
-            padding-top: 20px;
-            padding-bottom: 15px;
-            background-color: white;
+        .MyDiv5{
+            margin-bottom: 20px;
+        }
+        .MyDiv15{
+        margin-top: 34px;
+        margin-bottom: 34px;
+        }
+        body{
+            display: flex; 
+            flex-direction: column;          
+            background-color: antiquewhite;
+        }
 
-    }
-    .third_category{
-            border: 2px solid white;
-            padding-left: 30px;
-            width: 75%;
-            margin-left: 10%;
-            border-radius: 20px;
-            margin-top: 20px;
-            padding-bottom: 20px;
-            background-color: white;
-    }
-    .fourth_category{
-            border: 2px solid white;
-            
-            padding-left: 30px;
-            border-radius: 20px;
-            margin-top: 150px;
-            padding-bottom: 2px;
-            background-color: white;
-    }
+        .first_category {
+                border: 1px solid white;
+                padding-left: 20px;
+                width: 70%;
+                border-radius: 20px;
+                margin-left: 10%;
+                background-color: white;
+            }
 
-    .MyDiv4{
-        margin-bottom: 30px;
-    }
+        .second_category{
+                border: 2px solid white;
+                padding-left: 30px;
+                margin-left: 10%;
+                width: 70%;
+                border-radius: 20px;
+                padding-top: 20px;
+                padding-bottom: 15px;
+                background-color: white;
+
+        }
+        .third_category{
+                border: 2px solid white;
+                padding-left: 30px;
+                width: 75%;
+                margin-left: 10%;
+                border-radius: 20px;
+                margin-top: 20px;
+                padding-bottom: 20px;
+                background-color: white;
+        }
+        .fourth_category{
+                border: 2px solid white;
+                
+                padding-left: 30px;
+                border-radius: 20px;
+                margin-top: 150px;
+                padding-bottom: 2px;
+                background-color: white;
+        }
+
+        .MyDiv4{
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 <body>
 
 <?php
 
-include './databaseoptions.php';
+include '../includes/databaseoptions.php';
 
 //create a connection 
 $conn = new mysqli($servername,$username,$password,$dbname,$port);
@@ -380,7 +380,7 @@ if($conn->connect_error){
 
 
             <div class = "MyDiv6" style="display: flex; align-items: center; margin-bottom: 15px">
-                <img src="./images/clock.png" height="32px" width="32px">
+                <img src="../images/clock.png" height="32px" width="32px">
             <p class ="nod" style="display: inline; margin-left: 10px; font-size: 16px"> Your period lasted:  <span id="sp5">
     <?php            
     $sql1 = "SELECT period_length FROM my_symptoms;";
@@ -404,7 +404,7 @@ if($conn->connect_error){
 
 
             <div class = "MyDiv0" style = "display: flex; align-items:center">
-                <img style="border: 2px solid black; border-radius: 15px" src ="./images/blood-droplet.png" height = "30px" width="30px">
+                <img style="border: 2px solid black; border-radius: 15px" src ="../images/blood-droplet.png" height = "30px" width="30px">
                 <p class ="nod" style="display: inline; margin-left: 10px; font-size: 16px"> your blood flow was:  <span id = "sp6">
                 <?php            
     $sql1 = "SELECT Bloodflow FROM my_symptoms;";
@@ -432,7 +432,7 @@ if($conn->connect_error){
             <div class="third_category">
 
             <div class=" MyDiv8" style="display: flex; align-items: center">
-                <img src="./images/calendar.png" height="24px" width="24px">
+                <img src="../images/calendar.png" height="24px" width="24px">
                 <p class ="nod" style="display: inline; margin-left: 10px; font-size: 16px">Your cycle length was: <span id="sp8"> <?php            
                 $sql1 = "SELECT cycle_dates,cycle_length  FROM my_symptoms;";
                 $result1 = $conn->query($sql1);
@@ -633,12 +633,28 @@ if($conn->connect_error){
 
 <script>
     document.getElementById('seall').addEventListener('click', () => {
-        window.location = './seeallfinal.php'
+        window.location.href = '../Test Files/seeall.php'
     })
 
     document.getElementById('summary').addEventListener('click', () => {
         window.location = './currentAppointment.html'
     })
+    
+    // code from index.js for now
+    document.getElementById("view_trends").addEventListener("click", ()=> {
+        window.location = "./marie.html"
+    });
 
+    document.getElementById("logout").addEventListener("click", ()=> {
+        window.location = "./login.html"
+    });
+
+    document.getElementById("view_appointments").addEventListener("click", ()=> {
+        window.location = "./currentAppointment.html"
+    });
+
+    document.getElementById("schedule_appointments").addEventListener("click", ()=> {
+        window.location = "./schedule_appointment.html"
+    });
 </script>
 </html>

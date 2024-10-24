@@ -1,0 +1,1 @@
+// This is the major js file that carries most of the functionality of the app
