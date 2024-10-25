@@ -67,12 +67,15 @@
     }
     })
 
-
+    // Function to save login method to localStorage and redirect the doctor according to the login method
+    function login(method) {
+            // Save login method to localStorage
+            localStorage.setItem('loginMethod', method);
+            window.location.href = './views/main.php';
+    }
             
     document.getElementById("btn1").addEventListener("click", (event)=> {
         event.preventDefault();
-        //window.location = "./rene.php";});
-        var route_to;
 
         switch(document.getElementById('loginOptions').value) {
             case 'Choose desired Login Method':
@@ -80,17 +83,16 @@
                 break;
 
             case 'Password':
-                route_to = "./views/patientInfoSummary.html";
-                window.location.href = route_to;
+                login('password');
                 break;
 
             case 'One Time Passcode':
-                route_to = "./views/rene.php";
-                window.location.href = route_to;
+
+                login('otp');
                 break;
         }
     });
-
+    
     </script>
 
 

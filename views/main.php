@@ -8,25 +8,29 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to Ovum Doctor</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <!-- Add navigation links here -->
-            </ul>
+        <div class="top-nav">
+            <h1>Welcome to Ovum Doctor</h1>
+            <h1>Your Doctor</h1>
+            <a href="#">Home</a>
+            <a href="#">Profile</a>
+            <a href="#">Logout</a>
+        </div>
+        <div class="side-nav">
+            <a href="#">Dashboard</a>
+            <a href="#">Settings</a>
+        </div>
     </header>
     
     <main>
         <?php
         // This is where different sections of the system will be yielded
-        if (isset($content)) {
-            echo $content;
-        } else {
-            echo "<p>Content goes here.</p>";
-        }
+        // if (isset($content)) {
+        //     echo $content;
+        // } else {
+        //     echo "<p>Content goes here.</p>";
+        // } THIS IS THE OLD WAY OF DOING IT
         ?>
+        <div id="view-container" class="content-container"></div>
     </main>
     
     <footer>
