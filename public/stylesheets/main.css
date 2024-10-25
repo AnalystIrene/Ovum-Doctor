@@ -57,3 +57,118 @@ body {
     text-align: center;
     padding: 50px;
 }
+.sectorBody{
+    display: flex;
+    padding: 24px;
+    background-color: antiquewhite;
+}
+.view {
+    display: flex;
+    width: 100%;
+}
+
+.left, .right {
+    background-color: beige;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 10px;
+    width: 45%;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.section-title {
+    font-size: 30px;
+    margin: 25px 0 5px 0;
+}
+
+.center {
+    text-align: center;
+    margin: 35px 0 25px 0;
+}
+
+.link {
+    margin-left: 120px;
+    font-size: 20px;
+}
+
+.link:hover {
+    color: rgb(13, 35, 238);
+    cursor: pointer;
+}
+
+.category {
+    border: 2px solid white;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+.category.first-category {
+    width: 70%;
+    margin-left: 10%;
+}
+
+.category.second-category {
+    width: 70%;
+    margin-left: 10%;
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+
+.category.third-category {
+    width: 75%;
+    margin-left: 10%;
+    padding-bottom: 20px;
+}
+
+.category.fourth-category {
+    width: 100%;
+    margin: auto;
+    padding-bottom: 2px;
+    margin-bottom: 50px;
+}
+
+.item {
+    margin-top: 34px;
+}
+
+.item.flex {
+    display: flex;
+    align-items: center;
+}
+
+.item.flex img {
+    margin-right: 10px;
+}
+
+.detail {
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.highlight {
+    color: #f20404;
+}
+
+.bordered {
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.button-container {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.button {
+    font-size: 18px;
+    padding: 5px 24px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
