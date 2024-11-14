@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color:#FFC0CB;   /*#4e73df*/
+            --blend-primary-color:#fff0ff;
+            --secondary-color: #ff99cc; /*#858796;*/
+            --success-color: #8bc34a;
+            --complementary-color: #3498db;
+            --warning-color: #ff9900;
+            --error-color:#ff3737;
+            --triadic-color: #8e44ad;
+            --soft-orange-color: #ffd7be;
+            --golden-color:#f1c40f;
+        }
+        /* * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        } */
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #858796;
+            background: #f8f9fc;
+            overflow-y: auto;
+        }
+
+        /* Top Navigation Styles */
+        .top-nav {
+            background: var(--secondary-color);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #444;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .top-nav .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .top-nav .headings {
+            text-align: left;
+            margin-left: 24px;
+        }
+
+        .top-nav .headings h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--blend-primary-color);
+            margin-bottom: 4px;
+        }
+
+        .top-nav .headings h3 {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .top-nav nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .top-nav nav a {
+            color: var(--blend-primary-color);
+            text-decoration: none;
+            margin-left: 24px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-nav nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .top-nav #logout {
+            margin-left: 16px;
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .top-nav #logout:hover {
+            background: var(--soft-orange-color);
+        }
+
+        .top-nav .hamburger {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--blend-primary-color);
+            font-size: 24px;    
+            cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 767px) {
+            .top-nav nav {
+                display: none;
+            }
+
+            .top-nav .hamburger {
+                display: block;
+            }
+
+            .top-nav.active nav {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                position: absolute;
+                top: 92px;  /* Adjusted to account for the height of the header */
+                left: 0;
+                right: 0;
+                background: var(--secondary-color);
+                padding: 16px 24px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+
+            .top-nav.active nav a {
+                margin: 8px 0;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+        .vital-card {
+            transition: transform 0.2s;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .vital-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .vital-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .bg-soft-primary { background: rgba(13, 110, 253, 0.1); }
+        .bg-soft-success { background: rgba(25, 135, 84, 0.1); }
+        .bg-soft-warning { background: rgba(255, 193, 7, 0.1); }
+        .bg-soft-danger { background: rgba(220, 53, 69, 0.1); }
+
+        .patient-header {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-tabs .nav-link {
+            border: none;
+            color: #6c757d;
+            padding: 10px 20px;
+            margin-right: 5px;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #0d6efd;
+            border-bottom: 2px solid #0d6efd;
+            background: transparent;
+        }
+
+        .chart-container {
+            height: 300px;
+            width: 100%;
+        }
+
+        .visit-card {
+            transition: all 0.3s ease;
+        }
+
+        .visit-card:hover {
+            background: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        /* Custom scrollbar for better UX */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="top-nav">
+        <div class="logo-section">
+            <div class="logo">
+                <img src="../images/GynLogo(2).png" alt="Medical Center Logo">
+            </div>
+            <div class="headings">
+                <h2>OVUM DOCTOR</h2>
+                <h3>Clinic Name</h3>
+            </div>
+        </div>
+        
+        <div class="nav-links">
+            <nav>
+                <a href="#dashboard"><i class="fas fa-home"></i> Home</a>
+                <a href="#patients"><i class="fas fa-user-injured"></i> Patient</a>
+                <a href="#appointments"><i class="fas fa-calendar-check"></i> Appointments</a>
+                <a href="#reports"><i class="fas fa-arrow-up"></i> Back</a>
+            </nav>
+            <button id="logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            <button class="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <!-- Patient Header -->
+        <div class="patient-header p-4 mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2 class="mb-2">Atwigukye Peace</h2>
+                    <div class="d-flex gap-4 text-muted">
+                        <span><i class="fas fa-calendar-days me-2"></i>34 years old (DOB: 1990-05-15)</span>
+                        <span class="text-danger"><i class="fas fa-circle-exclamation me-2"></i>Heamorage: Accute stage</span>
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <button class="btn btn-primary me-2">Add New Visit</button>
+                    <button class="btn btn-outline-primary">Edit Patient</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#overview">Overview</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#vitals">Vitals History</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#visits">Past Visits</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#medications">Medications</button>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <!-- Overview Tab -->
+            <div class="tab-pane fade show active" id="overview">
+                <!-- Vital Cards -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="vital-card card">
+                            <div class="card-body">
+                                <div class="vital-icon bg-soft-danger text-danger">
+                                    <i class="fas fa-heartbeat"></i>
+                                </div>
+                                <h6 class="text-muted mb-2">Blood Pressure</h6>
+                                <h2 class="mb-0">120/80</h2>
+                                <small class="text-muted">Last checked: Today</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="vital-card card">
+                            <div class="card-body">
+                                <div class="vital-icon bg-soft-primary text-primary">
+                                    <i class="fas fa-wave-square"></i>
+                                </div>
+                                <h6 class="text-muted mb-2">Heart Rate</h6>
+                                <h2 class="mb-0">72 bpm</h2>
+                                <small class="text-muted">Last checked: Today</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="vital-card card">
+                            <div class="card-body">
+                                <div class="vital-icon bg-soft-warning text-warning">
+                                    <i class="fas fa-temperature-high"></i>
+                                </div>
+                                <h6 class="text-muted mb-2">Temperature</h6>
+                                <h2 class="mb-0">37.2°C</h2>
+                                <small class="text-muted">Last checked: Today</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="vital-card card">
+                            <div class="card-body">
+                                <div class="vital-icon bg-soft-success text-success">
+                                    <i class="fas fa-weight-scale"></i>
+                                </div>
+                                <h6 class="text-muted mb-2">Weight</h6>
+                                <h2 class="mb-0">70 kg</h2>
+                                <small class="text-muted">Last checked: Today</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Cycle Variations</h5>
+                        <div class="chart-container" id="vitalsChart">
+                            <!-- Chart will be rendered here -->
+                            <div id="chart-container" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">
+                                    <i class="fas fa-clock me-2"></i>Recent Visits
+                                </h5>
+                                <div class="visit-card p-3 border-bottom">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="mb-1">Regular Checkup</h6>
+                                            <small class="text-muted">Dr. Rebecca</small>
+                                        </div>
+                                        <small class="text-muted">2024-03-15</small>
+                                    </div>
+                                </div>
+                                <!-- More visit cards -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">
+                                    <i class="fas fa-pills me-2"></i>Current Medications
+                                </h5>
+                                <div class="visit-card p-3 border-bottom">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="mb-1">Syrap</h6>
+                                            <small class="text-muted">10ml daily</small>
+                                        </div>
+                                        <span class="status-badge bg-success bg-opacity-10 text-success">
+                                            Active
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- More medication cards -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other tabs content would go here -->
+              <!-- Vitals History Tab -->
+            <div class="tab-pane fade" id="vitals" role="tabpanel">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Vitals History</h5>
+                    <div id="vitals-chart" style="height: 200px;"></div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Past Visits Tab -->
+                <div class="tab-pane fade" id="visits" role="tabpanel">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Past Visits</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                        Regular Checkup with Dr. Rebecca- 2024-03-15
+                        </li>
+                        <li class="list-group-item">
+                        Flu Symptoms with Dr. Atwiine - 2024-02-01
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Medications Tab -->
+                <div class="tab-pane fade" id="medications" role="tabpanel">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Medications</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">Syrap - 10ml daily</li>
+                        <li class="list-group-item">Panadol - 500mg twice daily</li>
+                    </ul>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        // Initialize charts and other interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample chart initialization
+            const ctx = document.getElementById('vitalsChart').getContext('2d');
+            const vitalsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Heart Rate',
+                        data: [72, 75, 70, 73, 72],
+                        borderColor: '#0d6efd',
+                        tension: 0.4
+                    }, {
+                        label: 'Weight',
+                        data: [70, 69.5, 69.8, 70.2, 70],
+                        borderColor: '#198754',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+        });
+         // Sample chart data
+        Highcharts.chart('chart-container', {
+            title: { text: 'Change in Cyle Lenthgs' },
+            xAxis: { categories: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12'] },
+            series: [{
+            name: 'Cyle Length',
+            data: [72, 75, 70, 73, 72, 71, 70, 72, 73, 74, 75, 76]
+            }, {
+            name: 'Period Length',
+            data: [70, 69.5, 69.8, 70.2, 70, 69.5, 69.8, 70.2, 70, 69.5, 69.8, 70.2]
+            }]
+        });
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const topNav = document.querySelector('.top-nav');
+
+        hamburger.addEventListener('click', () => {
+            topNav.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!topNav.contains(e.target) && topNav.classList.contains('active')) {
+                topNav.classList.remove('active');
+            }
+        });
+
+        // Close mobile menu when window is resized above mobile breakpoint
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 767 && topNav.classList.contains('active')) {
+                topNav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

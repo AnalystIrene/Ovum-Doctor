@@ -1,0 +1,165 @@
+<div class="view">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar p-4">
+            <h4 class="mb-4">Ovum Doctor</h4>
+            <nav class="nav flex-column">
+                <a class="nav-link active" href="#"><i class="fas fa-home me-2"></i>Dashboard</a>
+                <a class="nav-link" href="#"><i class="fas fa-calendar me-2"></i>Appointments</a>
+                <a class="nav-link" href="#"><i class="fas fa-users me-2"></i>Patients</a>
+                <a class="nav-link" href="#"><i class="fas fa-chart-line me-2"></i>Analytics</a>
+                <a class="nav-link" href="#"><i class="fas fa-cog me-2"></i>Settings</a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10 p-4">
+            <!-- Welcome Section -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Welcome back, Dr. Rebecca!</h2>
+                <div>
+                    <button class="btn btn-outline-secondary me-2">
+                        <i class="fas fa-envelope"></i> Messages
+                    </button>
+                    <button class="btn btn-outline-primary me-2">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>New Appointment
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card stats-card bg-primary text-white">
+                        <div class="card-body">
+                            <h6>Today's Appointments</h6>
+                            <h2>24</h2>
+                            <p class="mb-0"><i class="fas fa-arrow-up me-2"></i>3.5% increase</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card bg-success text-white">
+                        <div class="card-body">
+                            <h6>Completed</h6>
+                            <h2>12</h2>
+                            <p class="mb-0">50% of daily target</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card bg-info text-white">
+                        <div class="card-body">
+                            <h6>Pending</h6>
+                            <h2>8</h2>
+                            <p class="mb-0">Next in 15 mins</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card bg-warning text-white">
+                        <div class="card-body">
+                            <h6>Cancelled</h6>
+                            <h2>4</h2>
+                            <p class="mb-0">Today's cancellations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar and Patient List -->
+            <div class="row">
+                <div class="col-md-8 mb-4">
+                    <div class="calendar-container">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4>Appointment Calendar</h4>
+                            <div class="btn-group">
+                                <button class="btn text-primary btn-sm" id="calendarViewMonth">Monthly</button>
+                                <button class="btn text-primary btn-sm" id="calendarViewWeek">Weekly</button>
+                                <button class="btn text-primary btn-sm" id="calendarViewDay">Daily</button>
+                            </div>
+                        </div>
+                        <div id="calendar" class="responsive-calendar"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="patient-list">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4>Today's Patients</h4>
+                            <button class="btn btn-sm text-primary">View All</button>
+                        </div>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Sharifah N</h6>
+                                    <small>9:00 AM</small>
+                                </div>
+                                <p class="mb-1">Regular Checkup</p>
+                                <small class="text-success">Confirmed</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Ryn M.A.</h6>
+                                    <small>10:30 AM</small>
+                                </div>
+                                <p class="mb-1">Follow-up</p>
+                                <small class="text-warning">Pending</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Aine W.U.</h6>
+                                    <small>2:00 PM</small>
+                                </div>
+                                <p class="mb-1">Consultation</p>
+                                <small class="text-primary">In Progress</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- New Appointment Modal -->
+    <div class="modal fade" id="newAppointmentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Schedule New Appointment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="appointmentForm">
+                        <div class="mb-3">
+                            <label class="form-label">Patient Name</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date & Time</label>
+                            <input type="datetime-local" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Appointment Type</label>
+                            <select class="form-select">
+                                <option>Regular Checkup</option>
+                                <option>Consultation</option>
+                                <option>Follow-up</option>
+                                <option>Emergency</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Notes</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Schedule Appointment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

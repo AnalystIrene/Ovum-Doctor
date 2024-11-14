@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ovum Doctor</title>
+
+    <!-- Only include one Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Updated Font Awesome link to resolve QUIC error -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.0.0/main.min.css" rel="stylesheet">
+    <link href="../public/stylesheets/calendar.css" rel="stylesheet">
+    <link href="../public/stylesheets/main.css" rel="stylesheet">   
+</head>
+<body class="bg-light">
+    <div class="top-nav">
+        <div class="logo-section">
+            <div class="logo">
+                <img src="../images/GynLogo(2).png" alt="Medical Center Logo">
+            </div>
+            <div class="headings">
+                <h2>OVUM DOCTOR</h2>
+                <h3>Clinic Name</h3>
+            </div>
+        </div>
+        
+        <div class="nav-links">
+            <nav>
+                <a href="#dashboard"><i class="fas fa-home"></i> Home</a>
+                <a href="#patients"><i class="fas fa-user-injured"></i> Patient</a>
+                <a href="#appointments"><i class="fas fa-calendar-check"></i> Appointments</a>
+                <a href="#reports"><i class="fas fa-arrow-up"></i> Back</a>
+            </nav>
+            <button id="logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            <button class="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <!-- Yield main content in this div according to the login method -->
+        <div id="view-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+
+    <!-- FullCalendar -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.0.0/main.min.js"></script>
+
+    <!-- Chart.js and Highcharts scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <script src="../public/scripts/main.js"></script>
+    <script>
+        /**
+         * Initializes the FullCalendar instance with interactivity and event data.
+         * @param {HTMLElement} calendarEl - The calendar DOM element where the calendar will be rendered.
+         */
+        function initializeCalendar(calendarEl) {
+            try {
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: null // No buttons on the right for now
+                    },
+                    editable: true,
+                    selectable: true,
+                    selectMirror: true,
+                    dayMaxEvents: true, // Limit the number of events per day
+                    events: getEventData(), // Load events from a function
+                    eventContent: customizeEventContent, // Customize how event looks
+                    select: handleDateSelection, // Handle selecting a date range
+                    eventClick: handleEventClick, // Handle clicking an event
+                    eventDrop: handleEventDrop // Handle dragging/dropping an event
+                });
+
+                calendar.render(); // Render the calendar
+            } catch (error) {
+                console.error('Error initializing calendar:', error);
+            }
+        }
+
+        /**
+         * Function to return an array of event data.
+         * You can replace this with a dynamic data source like an API.
+         */
+        function getEventData() {
+            return [
+                {
+                    title: 'Sharifah N - Checkup',
+                    start: '2024-11-11T09:00:00',
+                    className: 'appointment-confirmed'
+                },
+                {
+                    title: 'Ryn M.A. - Follow-up',
+                    start: '2024-11-11T10:30:00',
+                    className: 'appointment-pending'
+                },
+                {
+                    title: 'Aine W.U. - Consultation',
+                    start: '2024-11-11T14:00:00',
+                    className: 'appointment-cancelled'
+                }
+            ];
+        }
+
+        /**
+         * Customizes how the events are displayed on the calendar.
+         * @param {Object} arg - The argument containing event details.
+         */
+        function customizeEventContent(arg) {
+            return {
+                html: `
+                    <div class="custom-event">
+                        <span class="custom-event-dot"></span>
+                        ${arg.event.title}
+                    </div>
+                `
+            };
+        }
+
+        /**
+         * Handles what happens when a date range is selected.
+         * @param {Object} info - The information about the selected date range.
+         */
+        function handleDateSelection(info) {
+            var modal = new bootstrap.Modal(document.getElementById('newAppointmentModal'));
+            modal.show(); // Open modal for a new appointment
+        }
+
+        /**
+         * Handles the event click interaction.
+         * @param {Object} info - The information about the clicked event.
+         */
+        function handleEventClick(info) {
+            alert('Appointment: ' + info.event.title);
+        }
+
+        /**
+         * Handles the event drop interaction (when an event is moved to a new date).
+         * @param {Object} info - The information about the dropped event.
+         */
+        function handleEventDrop(info) {
+            alert('Appointment moved to ' + info.event.startStr);
+        }
+
+        /**
+         * Sets event listeners for calendar view buttons to switch views.
+         */
+        function setCalendarViewButtons() {
+            try {
+                document.getElementById('calendarViewMonth').addEventListener('click', function() {
+                    FullCalendar.getCalendar('calendar').changeView('dayGridMonth');
+                });
+
+                document.getElementById('calendarViewWeek').addEventListener('click', function() {
+                    FullCalendar.getCalendar('calendar').changeView('timeGridWeek');
+                });
+
+                document.getElementById('calendarViewDay').addEventListener('click', function() {
+                    FullCalendar.getCalendar('calendar').changeView('timeGridDay');
+                });
+            } catch (error) {
+                console.error('Error setting calendar view buttons:', error);
+            }
+        }
+
+        // Initialize the calendar once the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            // Ensure calendar element exists before proceeding
+            if (calendarEl) {
+                initializeCalendar(calendarEl);
+                setCalendarViewButtons(); // Set view button listeners after initializing calendar
+            } else {
+                console.error("Calendar element not found.");
+            }
+        });
+        /**
+         * Initializes the Chart.js line chart for vitals (Heart Rate & Weight).
+         */
+        function initializeVitalsChart() {
+            try {
+                const ctx = document.getElementById('vitalsChart').getContext('2d');
+                const vitalsChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], // Example static labels, can be dynamic
+                        datasets: [{
+                            label: 'Heart Rate',
+                            data: [72, 75, 70, 73, 72], // Example data, make it dynamic if needed
+                            borderColor: '#0d6efd', // Blue color for heart rate
+                            backgroundColor: 'rgba(13, 110, 253, 0.2)', // Light blue background
+                            tension: 0.4 // Smooth curves
+                        }, {
+                            label: 'Weight',
+                            data: [70, 69.5, 69.8, 70.2, 70], // Example data, make it dynamic if needed
+                            borderColor: '#198754', // Green color for weight
+                            backgroundColor: 'rgba(25, 135, 84, 0.2)', // Light green background
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false, // Allow the chart to resize
+                        plugins: {
+                            legend: {
+                                position: 'top', // Position of legend
+                                labels: {
+                                    boxWidth: 12 // Smaller legend boxes
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true // Start the y-axis at 0
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error initializing vitals chart:', error);
+            }
+        }
+
+        /**
+         * Initializes the Highcharts line chart for cycle variations.
+         */
+        function initializeCycleChart() {
+            try {
+                Highcharts.chart('chart-container', {
+                    title: {
+                        text: 'Change in Cycle Lengths'
+                    },
+                    xAxis: {
+                        categories: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12'], // Example static categories
+                        title: {
+                            text: 'Month'
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Days'
+                        }
+                    },
+                    series: [{
+                        name: 'Cycle Length',
+                        data: [72, 75, 70, 73, 72, 71, 70, 72, 73, 74, 75, 76], // Example data, make it dynamic if needed
+                        color: '#007bff' // Blue color for cycle length
+                    }, {
+                        name: 'Period Length',
+                        data: [70, 69.5, 69.8, 70.2, 70, 69.5, 69.8, 70.2, 70, 69.5, 69.8, 70.2], // Example data, make it dynamic if needed
+                        color: '#28a745' // Green color for period length
+                    }],
+                    responsive: {
+                        rules: [{
+                            condition: {
+                                maxWidth: 600 // Adjust chart for smaller screens
+                            },
+                            chartOptions: {
+                                legend: {
+                                    layout: 'horizontal',
+                                    align: 'center',
+                                    verticalAlign: 'bottom'
+                                }
+                            }
+                        }]
+                    }
+                });
+            } catch (error) {
+                console.error('Error initializing cycle chart:', error);
+            }
+        }
+
+        // Initialize charts and other interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize both charts when the document is ready
+            initializeVitalsChart();
+            initializeCycleChart();
+        });
+
+    </script>
+</body>
+</html>
