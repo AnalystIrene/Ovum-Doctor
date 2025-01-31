@@ -1,0 +1,267 @@
+:root {
+    --primary-color:#FFC0CB;   /*#4e73df*/
+    --blend-primary-color:#fff0ff;
+    --secondary-color: #ff99cc; /*#858796;*/
+    --success-color: #8bc34a;
+    --complementary-color: #3498db;
+    --warning-color: #ff9900;
+    --error-color:#ff3737;
+    --triadic-color: #8e44ad;
+    --soft-orange-color: #ffd7be;
+    --golden-color:#f1c40f;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #858796;
+    background: #f8f9fc;
+    overflow-y: auto;
+}
+
+/* Top Navigation Styles */
+.top-nav {
+    background: var(--secondary-color);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #444;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+}
+
+.top-nav .logo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.top-nav .headings {
+    text-align: left;
+    margin-left: 24px;
+}
+
+.top-nav .headings h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--blend-primary-color);
+    margin-bottom: 4px;
+}
+
+.top-nav .headings h3 {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.top-nav nav {
+    display: flex;
+    align-items: center;
+}
+
+.top-nav nav a {
+    color: var(--blend-primary-color);
+    text-decoration: none;
+    margin-left: 24px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.top-nav nav a:hover {
+    color: var(--primary-color);
+}
+
+.top-nav #logout {
+    margin-left: 16px;
+    padding: 8px 16px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.top-nav #logout:hover {
+    background: var(--soft-orange-color);
+}
+
+.top-nav .hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--blend-primary-color);
+    font-size: 24px;    
+    cursor: pointer;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background: linear-gradient(180deg, var(--blend-primary-color) 0%, #fff0ff 100%);
+    min-height: 100vh;
+}
+
+.sidebar h4 {
+    color: var(--primary-color);
+}
+
+.sidebar .nav-link {
+    background-color: #fafafa;
+    color: #444; 
+    margin-bottom: .5rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    transition: all 0.3s;
+}
+
+.sidebar .nav-link:hover {
+    color: #FFC0CB;
+    background: rgba(255, 255, 255, .1);
+}
+
+/* Card Styles */
+.stats-card {
+    border: none;
+    border-radius: 1rem;
+    transition: transform 0.3s;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+}
+
+.vital-card {
+    transition: transform 0.2s;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.vital-card:hover {
+    transform: translateY(-5px);
+}
+
+.vital-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+/* Background Colors */
+.bg-soft-primary { background: rgba(13, 110, 253, 0.1); }
+.bg-soft-success { background: rgba(25, 135, 84, 0.1); }
+.bg-soft-warning { background: rgba(255, 193, 7, 0.1); }
+.bg-soft-danger { background: rgba(220, 53, 69, 0.1); }
+
+/* Patient Header */
+.patient-header {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Tab Navigation */
+.nav-tabs .nav-link {
+    border: none;
+    color: #6c757d;
+    padding: 10px 20px;
+    margin-right: 5px;
+}
+
+.nav-tabs .nav-link.active {
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+    background: transparent;
+}
+
+/* Chart Container */
+.chart-container {
+    height: 300px;
+    width: 100%;
+}
+
+/* Visit Card */
+.visit-card {
+    transition: all 0.3s ease;
+}
+
+.visit-card:hover {
+    background: #f8f9fa;
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsive Styles */
+@media (max-width: 767px) {
+    .top-nav nav {
+        display: none;
+    }
+
+    .top-nav .hamburger {
+        display: block;
+    }
+
+    .top-nav.active nav {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 92px;
+        left: 0;
+        right: 0;
+        background: var(--secondary-color);
+        padding: 16px 24px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .top-nav.active nav a {
+        margin: 8px 0;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: flex-end;
+    }
+} 
